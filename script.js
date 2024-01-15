@@ -82,6 +82,18 @@ const displayMovements = function(movements) {
 
 
 
+const createUsernames = function(accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name =>name[0])
+      .join('');
+  });
+};
+createUsername(accounts)
+
+
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -96,3 +108,12 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
+
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+
+const depositsFor = [];
+for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+
+const withdrawl = movements.filter(mov => mov < 0);
